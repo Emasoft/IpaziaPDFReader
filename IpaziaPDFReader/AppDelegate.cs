@@ -14,7 +14,7 @@ namespace IpaziaPDFReader
 	{
 		// class-level declarations
 		UIWindow window;
-
+		PageTurnViewController viewController;
 		//
 		// This method is invoked when the application has loaded and is ready to run. In this 
 		// method you should instantiate the window, load the UI into it and then make the window
@@ -30,7 +30,7 @@ namespace IpaziaPDFReader
 			// If you have defined a view, add it here:
 			// window.AddSubview (navigationController.View);
 			
-			PageTurnViewController viewController = new PageTurnViewController ("PageTurnViewController", null);
+			viewController = new PageTurnViewController ("PageTurnViewController", null);
 			window.AddSubview (viewController.View);
 			// make the window visible
 			window.MakeKeyAndVisible ();
