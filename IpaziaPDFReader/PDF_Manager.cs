@@ -110,15 +110,23 @@ namespace IpaziaPDFReader
 			if (oContentView != null)
 				oContentView.RemoveFromSuperview ();
 			
+			if (scroll_area != null)
+				scroll_area.RemoveFromSuperview();
+			
 			if (tiled_layer_delegate != null)
 				tiled_layer_delegate.Dispose ();
 			
 			if (scroll_area_delegate != null)
 				scroll_area_delegate.Dispose ();
 			
-			scroll_area.Delegate = null;
-			oTiledLayer.Delegate = null;
+			if (scroll_area != null)
+				scroll_area.Delegate = null;
+			
+			if (oTiledLayer != null)
+				oTiledLayer.Delegate = null;
+			
 			scroll_area_delegate = null;
+			
 			tiled_layer_delegate = null;
 			
 			if (currentPDFPage != null)
