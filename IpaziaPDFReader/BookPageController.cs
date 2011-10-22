@@ -47,6 +47,17 @@ namespace IpaziaPDFReader
 			this.View.AddSubview (pdf_view_controller.View);
 		}
 		
+		protected override void Dispose (bool disposing)
+		{
+			if(pdf_view_controller != null) pdf_view_controller.Dispose ();
+			pdf_view_controller = null;
+			base.Dispose (disposing);
+		}
+		
+		 ~BookPageController ()
+		{
+			Console.WriteLine ("BookPageController of page " + PageIndex +"  disposed");
+		}
 		
 	}
 }

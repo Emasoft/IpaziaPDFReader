@@ -17,6 +17,7 @@ namespace IpaziaPDFReader
 		private UIPageViewController pageController;
 		public BookPageController firstPageController;
 		public UIViewController[] page_controllers_array;
+		public List<BookPageController> book_page_controllers_reference_list = new List<BookPageController>();
 		
 		public PageTurnViewController (string nibName, NSBundle bundle) : base (nibName, bundle)
 		{
@@ -50,7 +51,7 @@ namespace IpaziaPDFReader
 			base.ViewDidLoad ();
 			
 			//any additional setup after loading the view, typically from a nib.
-			NSUrl u = NSUrl.FromString (@"http://freehtml5templates.com/downloads/free/html5-quick-learning-quide.pdf");
+			NSUrl u = NSUrl.FromString (@"http://www.eustudies.org/files/pecon_newsletters/PENewsletterSpring07.pdf");
 			Console.WriteLine ("Loading PDF: {0}", u.ToString ()); 
 			this.currentPDFdocument = CGPDFDocument.FromUrl (u.ToString ());
 			total_book_pages = this.currentPDFdocument.Pages;

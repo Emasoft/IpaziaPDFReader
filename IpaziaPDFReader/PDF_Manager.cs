@@ -20,7 +20,7 @@ namespace IpaziaPDFReader
 		public CGPDFDocument currentPDFdocument;
 		public CGPDFPage currentPDFPage;
 		public CATiledLayer oTiledLayer;
-		private int page_number;
+		public int page_number;
 		public TiledLayerDelegate tiled_layer_delegate;
 		
 		
@@ -35,7 +35,7 @@ namespace IpaziaPDFReader
 		
 		public void Init (CGPDFDocument oPdfDoc, int page, PageTurnViewController mother_controller)
 		{
-			
+			Console.WriteLine ("Rendering PDF Page Number: " + page);
 			this.page_number = page;
 			this.currentPDFdocument = oPdfDoc;
 			
@@ -45,7 +45,7 @@ namespace IpaziaPDFReader
 			Console.WriteLine ("page: " + page_number);
 			
 				
-			RectangleF oPdfPageRect = this.currentPDFPage.GetBoxRect (CGPDFBox.Crop);
+			RectangleF oPdfPageRect = this.currentPDFPage.GetBoxRect (CGPDFBox.Bleed);
 			
 			Console.WriteLine ("PDFRect : " + oPdfPageRect.ToString ());
 				
@@ -63,6 +63,7 @@ namespace IpaziaPDFReader
 			this.oContentView.Layer.AddSublayer (oTiledLayer);
 			
 			//this.View = new UIView (new RectangleF (0, 20, 320, 480 - 20));
+			this.View.Frame = new RectangleF (0, 20, 320, 480 - 20);
 			this.View.AutoresizingMask = 
 					UIViewAutoresizing.FlexibleWidth
 					| UIViewAutoresizing.FlexibleHeight
@@ -75,7 +76,7 @@ namespace IpaziaPDFReader
 
 			this.View.Layer.BorderColor = UIColor.Red.CGColor;
 			this.View.Layer.BorderWidth = 2f;
-
+			
 				
 			
 			
@@ -101,8 +102,43 @@ namespace IpaziaPDFReader
 			base.ViewDidLoad ();
 		}
 		
+		protected override void Dispose (bool disposing)
+		{
+			if (oTiledLayer != null)
+				oTiledLayer.RemoveFromSuperLayer ();
+			
+			if (oContentView != null)
+				oContentView.RemoveFromSuperview ();
+			
+			if (tiled_layer_delegate != null)
+				tiled_layer_delegate.Dispose ();
+			
+			if (scroll_area_delegate != null)
+				scroll_area_delegate.Dispose ();
+			
+			scroll_area.Delegate = null;
+			oTiledLayer.Delegate = null;
+			scroll_area_delegate = null;
+			tiled_layer_delegate = null;
+			
+			if (currentPDFPage != null)
+				currentPDFPage.Dispose ();
+			
+			currentPDFPage = null;
+			
+			if (oTiledLayer != null)
+				oTiledLayer.Dispose ();
+			
+			oTiledLayer = null;
+			
+			base.Dispose (disposing);
+		}
 		
 		
+		 ~PDF_Manager ()
+		{
+			Console.WriteLine ("PDF_Manager of page " + page_number +"  disposed");
+		}
 		
 	}
 }

@@ -24,6 +24,11 @@ namespace IpaziaPDFReader
 			return this.oParentController.oContentView;	
 			
 		}
+		
+		 ~ScrollViewDelegate ()
+		{
+			Console.WriteLine ("ScrollViewDelegate of page " + oParentController.page_number +"  disposed");
+		}
 	}
 }
 

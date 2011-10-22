@@ -34,6 +34,11 @@ namespace IpaziaPDFReader
 				
 					
 		}
+		
+		 ~TiledLayerDelegate ()
+		{
+			Console.WriteLine ("TiledLayerDelegate of page " + oParentController.page_number +"  disposed");
+		}
 	}
 }
 
