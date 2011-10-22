@@ -89,7 +89,7 @@ namespace IpaziaPDFReader
 		//SOLUTION 1   
 		void ForcingPageControllerDispose (BookPageController oldPageController)
 		{
-			// --- IF YOU UNCOMMENT THIS, THE CRASHES GOES AWAY, BUT THE PAGE IN THE TRANSITION IS BLANK, SO IS NOT VIABLE
+			// --- IF YOU UNCOMMENT THIS, THE CRASHES GO AWAY, BUT THE PAGE IN THE TRANSITION IS BLANK, SO IS NOT VIABLE
 //			currentPageController.View.RemoveFromSuperview ();
 //			currentPageController.Dispose ();
 		}
@@ -98,7 +98,7 @@ namespace IpaziaPDFReader
 		//SOLUTION 2
 		void DisposeThePageControllerWhenDidFinishAnimating (BookPageController oldPageController, UIPageViewController pageViewController)
 		{
-			// --- IF YOU UNCOMMENT THIS, THE CRASHES STILL HAPPENS
+			// --- IF YOU UNCOMMENT THIS, THE CRASHES STILL HAPPEN
 //			pageViewController.DidFinishAnimating += delegate(object sender, UIPageViewFinishedAnimationEventArgs e) {
 //				if (currentPageController != null) {
 //					currentPageController.View.RemoveFromSuperview ();
@@ -112,7 +112,7 @@ namespace IpaziaPDFReader
 		//SOLUTION 3
 		void BackupUnusedPagesToAvoidBeingGCd (BookPageController oldPageController)
 		{
-			// --- IF YOU UNCOMMENT THIS, THE CRASHES GOES AWAY, BUT THE PAGES ARE NOT GARBAGE COLLECTED AND AFTER MANY PAGES IPHONE IS OUT OF MEMORY AND IT CRASHES THE APP
+			// --- IF YOU UNCOMMENT THIS, THE CRASHES GO AWAY, BUT THE PAGES ARE NOT GARBAGE COLLECTED AND AFTER MANY PAGES IPHONE IS OUT OF MEMORY AND IT CRASHES THE APP
 			if (parentController.book_page_controllers_reference_list.Contains (currentPageController) == false)
 				parentController.book_page_controllers_reference_list.Add (currentPageController);
 		}

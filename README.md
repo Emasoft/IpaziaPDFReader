@@ -14,7 +14,7 @@ Requirements
 --------------
 
 * MonoDevelop 2.8
-* MonoTouch 4.2
+* MonoTouch 5.0
 
 Installation
 -----------
@@ -26,6 +26,12 @@ Usage
 -----
 
 The PDF url is encoded at the moment, but you can change it with any online PDF.
+
+
+Known Issues
+------------
+
+* Unexpected crashes when changing pages and disposing them. Probably a problem with the Garbage Collector. Temporally keeping all pages referenced to avoid garbage collection (but this limit the memory, crashing the App with large PDFs). 
 
 
 Testing
