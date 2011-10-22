@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MonoTouch.Foundation;
 using MonoTouch.UIKit;
+using System.Drawing;
 
 namespace IpaziaPDFReader
 {
@@ -31,7 +32,14 @@ namespace IpaziaPDFReader
 			// window.AddSubview (navigationController.View);
 			
 			viewController = new PageTurnViewController ("PageTurnViewController", null);
+			
+			//Assign the PageTurnViewController as the only RootViewController
+			window.RootViewController = viewController;
+			
+			//Set the size of the View and Adding it to the window
+			viewController.View.Frame = new RectangleF (0.0f, 20.0f, 320.0f, 460.0f);
 			window.AddSubview (viewController.View);
+			
 			// make the window visible
 			window.MakeKeyAndVisible ();
 			

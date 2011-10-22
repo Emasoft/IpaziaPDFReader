@@ -46,9 +46,22 @@ namespace IpaziaPDFReader
 		}//end int TotalPages
 		
 		
+		
 		public override void ViewDidLoad ()
 		{
+			
+			
 			base.ViewDidLoad ();
+			
+			this.View.AutoresizingMask = 
+					UIViewAutoresizing.FlexibleWidth
+					| UIViewAutoresizing.FlexibleHeight
+					| UIViewAutoresizing.FlexibleTopMargin
+					| UIViewAutoresizing.FlexibleBottomMargin
+					| UIViewAutoresizing.FlexibleLeftMargin
+					| UIViewAutoresizing.FlexibleRightMargin;
+			this.View.AutosizesSubviews = true;
+			
 			
 			//any additional setup after loading the view, typically from a nib.
 			NSUrl u = NSUrl.FromString (@"http://www.eustudies.org/files/pecon_newsletters/PENewsletterSpring07.pdf");
@@ -59,7 +72,6 @@ namespace IpaziaPDFReader
 			
 			// Initialize the first page
 			firstPageController = new BookPageController (1, currentPDFdocument, this);
-				
 			
 			this.pageController = new UIPageViewController (UIPageViewControllerTransitionStyle.PageCurl, 
 				UIPageViewControllerNavigationOrientation.Horizontal, UIPageViewControllerSpineLocation.Min);
@@ -70,8 +82,7 @@ namespace IpaziaPDFReader
 			
 			page_data_source = new PageDataSource (this);
 			this.pageController.DataSource = page_data_source;
-			
-			this.pageController.View.Frame = this.View.Bounds;
+			this.pageController.View.Frame = this.View.Frame;
 			this.View.AddSubview (this.pageController.View);
 									
 		}

@@ -31,9 +31,17 @@ namespace IpaziaPDFReader
 			private set;
 		}
 		
+		
 		public override void ViewDidLoad ()
 		{
+			
 			base.ViewDidLoad ();
+			
+
+			
+			this.View.AutoresizingMask = mother_controller.View.AutoresizingMask;
+			this.View.AutosizesSubviews = true;
+			
 			
 			Console.WriteLine ("Book page #{0} loaded!", this.PageIndex);
 			LoadPDFPage (PageIndex);
@@ -45,6 +53,7 @@ namespace IpaziaPDFReader
 			pdf_view_controller = new PDF_Manager ();
 			pdf_view_controller.Init (currentPDFdocument, page_number, mother_controller);
 			this.View.AddSubview (pdf_view_controller.View);
+			
 		}
 		
 		protected override void Dispose (bool disposing)

@@ -33,17 +33,17 @@ namespace IpaziaPDFReader
 			
 		}
 		
+		
+		
+		// Init method. Call this before adding the instance of the PDF_Manager to the View.
 		public void Init (CGPDFDocument oPdfDoc, int page, PageTurnViewController mother_controller)
 		{
+
 			Console.WriteLine ("Rendering PDF Page Number: " + page);
 			this.page_number = page;
 			this.currentPDFdocument = oPdfDoc;
-			
-			
 		
 			currentPDFPage = this.currentPDFdocument.GetPage (page_number);
-			Console.WriteLine ("page: " + page_number);
-			
 				
 			RectangleF oPdfPageRect = this.currentPDFPage.GetBoxRect (CGPDFBox.Bleed);
 			
@@ -62,27 +62,17 @@ namespace IpaziaPDFReader
 			this.oContentView = new UIView (oPdfPageRect);
 			this.oContentView.Layer.AddSublayer (oTiledLayer);
 			
-			//this.View = new UIView (new RectangleF (0, 20, 320, 480 - 20));
-			this.View.Frame = new RectangleF (0, 20, 320, 480 - 20);
-			this.View.AutoresizingMask = 
-					UIViewAutoresizing.FlexibleWidth
-					| UIViewAutoresizing.FlexibleHeight
-					| UIViewAutoresizing.FlexibleTopMargin
-					| UIViewAutoresizing.FlexibleBottomMargin
-					| UIViewAutoresizing.FlexibleLeftMargin
-					| UIViewAutoresizing.FlexibleRightMargin;
+			this.View.AutoresizingMask = mother_controller.View.AutoresizingMask;
 			this.View.AutosizesSubviews = true;
-				
 
+#if DEBUG			
 			this.View.Layer.BorderColor = UIColor.Red.CGColor;
 			this.View.Layer.BorderWidth = 2f;
-			
-				
-			
+#endif
 			
 			// Prepare scroll view.
 			
-			this.scroll_area.AutoresizingMask = this.View.AutoresizingMask;
+			this.scroll_area.AutoresizingMask = mother_controller.View.AutoresizingMask;
 			
 			scroll_area_delegate = new ScrollViewDelegate (this);
 			scroll_area.Delegate = scroll_area_delegate;	
